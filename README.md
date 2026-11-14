@@ -15,11 +15,13 @@ Summaries are generated with `facebook/bart-large-cnn`. Every timestamp is the r
 
 **Landing page**
 
-![Landing page](docs/screenshots/landing.png)
+<img width="1917" height="835" alt="image" src="https://github.com/user-attachments/assets/6c42a182-12b1-49e9-952d-5379ad6cec69" />
+
 
 **Generated notes**
+<img width="1917" height="890" alt="image" src="https://github.com/user-attachments/assets/deacd97b-e2d5-4dc7-86ef-85dc5cd00fc4" />
 
-![Generated notes](docs/screenshots/results.png)
+<img width="1906" height="603" alt="image" src="https://github.com/user-attachments/assets/993e6db0-d6ee-4b9f-b494-3cc7347beb7a" />
 
 ## How it works
 
