@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VidScribe AI — Take Notes from any YouTube videos</title>
+  <meta name="description" content="Turn long YouTube videos into Cornell-style study notes: key moments with timestamps, supporting notes and a summary." />
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+  <meta name="theme-color" content="#6C47FF" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/vidscribe.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="VidScribe AI home">
+      <img src="/static/favicon.svg" alt="" width="26" height="26" />
+      <span>VidScribe AI</span>
+    </a>
+    <span class="tech-label">BART · HUGGING FACE</span>
+  </header>
+
+  <main class="page">
+    <header class="intro">
+      <h1><em>Generate </em> notes from any YouTube video.</h1>
+      <p class="lede">Paste a link and VidScribe organises the video’s captions into key moments, supporting notes and a summary, laid out like a study sheet.</p>
+    </header>
+
+    <article class="sheet" id="sheet" aria-label="Notes sheet">
+
+      <!-- Source line (the "topic" line of a Cornell sheet) -->
+      <div class="row source">
+        <div class="cue"><label class="label" for="url-input">YOUTUBE URL</label></div>
+        <div class="note">
+          <form id="analyse-form" novalidate>
+            <div class="url-control">
+              <input id="url-input" name="url" type="url" inputmode="url" autocomplete="off"
+                     placeholder="Paste a YouTube link, e.g. https://www.youtube.com/watch?v=…" required />
+              <button id="analyse-btn" type="submit">Generate notes</button>
+            </div>
+          </form>
+          <ul class="tags" aria-label="Works well with">
+            <li>Lectures</li><li>Tutorials</li><li>Conference Talks</li><li>Podcasts</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Column headings -->
+      <div class="row cols">
+        <div class="cue">
+          <span class="label">KEY MOMENTS</span>
+          <span class="badge" id="highlight-badge" hidden></span>
+        </div>
+        <div class="note"><span class="label">NOTES</span></div>
+      </div>
+
+      <!-- Empty / processing / error state -->
+      <div class="row state" id="state-row">
+        <div class="cue" aria-hidden="true"><span class="cue-dash">—</span></div>
+        <div class="note">
+          <p id="empty-msg" class="empty">Paste a YouTube link above to begin. Key moments with clickable timestamps will appear in the left column, with the supporting notes beside them.</p>
+          <p id="no-moments" class="empty" hidden>No key moments could be identified for this video.</p>
+
+          <div id="status" class="status" role="status" aria-live="polite" hidden>
+            <span class="spinner" aria-hidden="true"></span>
+            <span id="status-text">Processing video…</span>
+          </div>
+
+          <div id="error" class="error" role="alert" hidden>
+            <p id="error-text"></p>
+            <button id="retry-btn" type="button" class="link-btn">Try again</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key moments: cue (timestamp) + note -->
+      <ol id="highlight-list" class="moments" hidden></ol>
+
+      <!-- Summary box (the bottom section of a Cornell sheet) -->
+      <section id="summary-section" class="summary" aria-labelledby="summary-heading">
+        <div class="summary-head">
+          <h2 id="summary-heading">Summary</h2>
+          <span class="badge" id="chunk-badge" hidden></span>
+        </div>
+        <p id="summary-text" class="placeholder">Your summary will appear here once the notes are generated.</p>
+        <footer class="meta" id="meta" hidden>
+          <span><b>Model</b> <span id="meta-model"></span></span>
+          <span><b>Provider</b> <span id="meta-provider"></span></span>
+        </footer>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span>VidScribe AI · Notes are generated from the video’s available captions and may contain inaccuracies.</span>
+  </footer>
+
+  <script src="/static/vidscribe.js" defer></script>
+</body>
+</html>
